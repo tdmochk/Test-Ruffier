@@ -1,0 +1,5 @@
+from final_win import* - в начало
+
+def next_click(self):
+        self.hide()
+        self.tw = FinalWin(self.pole5,self.pole2,self.pole3,self.pole4)
