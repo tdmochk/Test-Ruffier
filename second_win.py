@@ -2,6 +2,7 @@ import PyQt5
 from PyQt5.QtCore import Qt, QTimer, QTime
 from PyQt5.QtWidgets import QWidget,QApplication,QPushButton,QLabel,QVBoxLayout,QHBoxLayout,QLineEdit
 from instr import *
+from PyQt5.QtGui import QFont
 #from final_win import *
 
 class TestWin(QWidget):
@@ -60,7 +61,7 @@ class TestWin(QWidget):
         self.button3.clicked.connect(self.timer_final)
     def next_click(self):
         self.hide()
-        self.fw = final_win()
+        self.tw = FinalWin(self.pole5,self.pole2,self.pole3,self.pole4)
     def timer_test(self):                                        #таймер 1
         global time
         time = QTime(0, 0, 16)
@@ -71,7 +72,7 @@ class TestWin(QWidget):
         global time
         time = time.addSecs(-1)
         self.text_timer.setText(time.toString("hh:mm:ss"))
-        #self.text_timer.setFont(QFont("Times", 36, QFont.Bold))
+        self.text_timer.setFont(QFont("Times", 36, QFont.Bold))
         self.text_timer.setStyleSheet("color: rgb(0,0,0)")
         if time.toString("hh:mm:ss") == "00:00:00":
             self.timer.stop()
@@ -85,7 +86,7 @@ class TestWin(QWidget):
         global time
         time = time.addSecs(-1)
         self.text_timer.setText(time.toString("hh:mm:ss")[6:8])
-        #self.text_timer.setFont(QFont("Times", 36, QFont.Bold))
+        self.text_timer.setFont(QFont("Times", 36, QFont.Bold))
         self.text_timer.setStyleSheet("color: rgb(0,0,0)")
         if time.toString("hh:mm:ss") == "00:00:00":
             self.timer.stop()
@@ -107,13 +108,69 @@ class TestWin(QWidget):
             self.text_timer.setStyleSheet("color: rgb(0,0,0)")
 
         self.text_timer.setText(time.toString("hh:mm:ss"))
-        #self.text_timer.setFont(QFont("Times", 36, QFont.Bold))
+        self.text_timer.setFont(QFont("Times", 36, QFont.Bold))
         if time.toString("hh:mm:ss") == "00:00:00":
             self.timer.stop()
 
+class FinalWin(QWidget):
+    def results(self):
+        self.index = (4*(int(self.exp.t1)+int(self.exp.t2)+int(self.exp.t3))-200)/10
+        if self.exp.age >=15:                                 #15+
+            if self.index >=15:
+                return txt_res1
+            elif self.index <15 and self.index>=11:
+                return txt_res2
+            elif self.index <11 and self.index >=6:
+                return txt_res3
+            elif self.index <6 and self.index >=0.5:
+                return txt_res4
+            else:
+                return txt_res5
 
-run = QApplication([])
-TestWin = TestWin()
-TestWin.show()
-run.exec_()
-smh1 = TestWin(self.pole1)
+        elif self.exp.age >=13 and self.exp.age <=14:         #13-14
+            if self.index >=16.5:
+                return txt_res1
+            elif self.index <16.5 and self.index>=12.5:
+                return txt_res2
+            elif self.index <12.5 and self.index >=7.5:
+                return txt_res3
+            elif self.index <7.5 and self.index >=2:
+                return txt_res4
+            else:
+                return txt_res5
+
+        elif self.exp.age >=11 and self.exp.age <=12:         #11-12
+            if self.index >=18:
+                return txt_res1
+            elif self.index <18 and self.index>=14:
+                return txt_res2
+            elif self.index <14 and self.index >=9:
+                return txt_res3
+            elif self.index <9 and self.index >=3.5:
+                return txt_res4
+            else:
+                return txt_res5
+
+        elif self.exp.age >=9 and self.exp.age <=10:          #9-10
+            if self.index >=19.5:
+                return txt_res1
+            elif self.index <19.5 and self.index>=15.5:
+                return txt_res2
+            elif self.index <15.5 and self.index >10.5:
+                return txt_res3
+            elif self.index <10.5 and self.index >=5:
+                return txt_res4
+            else:
+                return txt_res5
+
+        elif self.exp.age >=7 and self.exp.age <=8:           #7-8
+            if self.index >=21:
+                return txt_res1
+            elif self.index <21 and self.index>=17:
+                return txt_res2
+            elif self.index <17 and self.index >=12:
+                return txt_res3
+            elif self.index <12 and self.index >=6.5:
+                return txt_res4
+            else:
+                return txt_res5
